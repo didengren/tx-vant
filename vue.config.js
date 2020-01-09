@@ -4,8 +4,25 @@ const TerserJSPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const GenerateTXRegistrationFilePlugin = require("@trinasolar/generate-tx-registration-file-plugin");
 const FileManagerPlugin = require("filemanager-webpack-plugin");
+const fs = require("fs");
 
 const OUTPUT_DIR = "dist";
+const BLANK_TPL_FTL_PATH = path.posix.join(process.cwd(), "conf.json.ftl");
+
+let confJsonFtlInfo = {};
+try {
+  const fileInfo = fs.readFileSync(BLANK_TPL_FTL_PATH, "utf-8");
+  confJsonFtlInfo = JSON.parse(fileInfo);
+  if (
+    !(
+      Object.prototype.hasOwnProperty.call(confJsonFtlInfo, "name") &&
+      Object.prototype.hasOwnProperty.call(confJsonFtlInfo, "identifier")
+    )
+  )
+    throw new Error("conf.json.ftl文件中的字段不正确");
+} catch (error) {
+  console.error("未成功获取conf.json.ftl文件信息报错内容：\n", error);
+}
 
 /**
  * 脚本命令中获取版本号
@@ -115,6 +132,8 @@ module.exports = {
     process.env.NODE_ENV !== "local" &&
       config.plugin("generate-tx-registration-file").use(
         new GenerateTXRegistrationFilePlugin(null, {
+          identifier: confJsonFtlInfo.identifier,
+          name: confJsonFtlInfo.name,
           version: versionStr,
           build: versionStr.replace(/\./g, "")
         })
