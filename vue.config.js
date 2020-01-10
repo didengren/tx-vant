@@ -7,7 +7,7 @@ const FileManagerPlugin = require("filemanager-webpack-plugin");
 const fs = require("fs");
 
 const OUTPUT_DIR = "dist";
-const BLANK_TPL_FTL_PATH = path.posix.join(process.cwd(), "conf.json.ftl");
+const BLANK_TPL_FTL_PATH = path.posix.join(process.cwd(), "config.json");
 
 let confJsonFtlInfo = {};
 try {
@@ -19,9 +19,9 @@ try {
       Object.prototype.hasOwnProperty.call(confJsonFtlInfo, "identifier")
     )
   )
-    throw new Error("conf.json.ftl文件中的字段不正确");
+    throw new Error("config.json文件中的字段不正确");
 } catch (error) {
-  console.error("未成功获取conf.json.ftl文件信息报错内容：\n", error);
+  console.error("未成功获取config.json文件信息报错内容：\n", error);
 }
 
 /**
@@ -132,7 +132,7 @@ module.exports = {
     process.env.NODE_ENV !== "local" &&
       config.plugin("generate-tx-registration-file").use(
         new GenerateTXRegistrationFilePlugin(null, {
-          identifier: confJsonFtlInfo.identifier,
+          identifier: `com.trinasolar.${confJsonFtlInfo.identifier}.${process.env.NODE_ENV}`,
           name: confJsonFtlInfo.name,
           version: versionStr,
           build: versionStr.replace(/\./g, "")
