@@ -145,7 +145,7 @@ module.exports = {
             archive: [
               {
                 source: OUTPUT_DIR,
-                destination: `${OUTPUT_DIR}/${process.env.NODE_ENV}-v.zip`,
+                destination: `${OUTPUT_DIR}/${confJsonFtlInfo.name}-${process.env.NODE_ENV}-v${versionStr}.zip`,
                 options: {
                   root: ""
                 }
