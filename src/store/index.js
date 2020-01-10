@@ -13,7 +13,8 @@ Vuex.Store.prototype.preDispatch = throttle(function(...args) {
     before: (action, state) => {},
     after: (action, state) => {
       console.log("action_____", that);
-      if (args[0] === action.type && typeof args[2] === "function") args[2]();
+      if (args[0] === action.type && typeof args[2] === "function")
+        args[2](action, state);
     }
   });
   return that.dispatch(...args);
