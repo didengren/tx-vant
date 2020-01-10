@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 const routes = [].concat(home);
 
 const router = new VueRouter({
-  mode: process.env.NODE_ENV === "development" ? "hash" : "history",
+  mode: "hash",
   base: process.env.BASE_URL,
   routes,
   scrollBehavior(to, from, savedPosition) {
