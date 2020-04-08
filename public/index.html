@@ -5,7 +5,7 @@
       if (~location.origin.indexOf("file://")) {
         var script = document.createElement("script");
         script.type = "text/javascript";
-        script.defer = "async";
+        script.async = "async";
         script.src = "cordova.js";
         document.head.appendChild(script);
       }
