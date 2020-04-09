@@ -6,7 +6,12 @@ const GenerateTXRegistrationFilePlugin = require("@trinasolar/generate-tx-regist
 const FileManagerPlugin = require("filemanager-webpack-plugin");
 const fs = require("fs");
 
-const OUTPUT_DIR = "dist";
+const OUTPUT_DIR =
+  process.env.NODE_ENV === "debug"
+    ? "release/test"
+    : process.env.NODE_ENV === "production"
+    ? "release/prod"
+    : `release/${process.env.NODE_ENV}`;
 const BLANK_TPL_FTL_PATH = path.posix.join(process.cwd(), "config.json");
 
 let confJsonFtlInfo = {};
