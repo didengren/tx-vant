@@ -48,11 +48,11 @@ function repeat(str, n) {
 
 // 注册一个全局自定义指令 `v-digital-table`
 Vue.directive("digitalTable", {
-  // bind: function(el, binding, vnode, oldVnode) {
-  //   if (typeof binding.value === "undefined") binding.value = {};
-  //   if (vnode.children.length > 0 && vnode.children[0].text)
-  //     reformDigital(el, vnode.children[0].text, binding.value);
-  // },
+  bind: function(el, binding, vnode, oldVnode) {
+    if (typeof binding.value === "undefined") binding.value = {};
+    if (vnode.children.length > 0 && vnode.children[0].text)
+      reformDigital(el, vnode.children[0].text, binding.value);
+  }
   // inserted: function(el, binding, vnode, oldVnode) {
   //   if (typeof binding.value === "undefined") binding.value = {};
   //   if (vnode.children.length > 0 && vnode.children[0].text)
@@ -63,9 +63,9 @@ Vue.directive("digitalTable", {
   //   if (vnode.children.length > 0 && vnode.children[0].text)
   //     reformDigital(el, vnode.children[0].text, binding.value);
   // },
-  componentUpdated: function(el, binding, vnode, oldVnode) {
-    if (typeof binding.value === "undefined") binding.value = {};
-    if (vnode.children.length > 0 && vnode.children[0].text)
-      reformDigital(el, vnode.children[0].text, binding.value);
-  }
+  // componentUpdated: function(el, binding, vnode, oldVnode) {
+  //   if (typeof binding.value === "undefined") binding.value = {};
+  //   if (vnode.children.length > 0 && vnode.children[0].text)
+  //     reformDigital(el, vnode.children[0].text, binding.value);
+  // }
 });
