@@ -136,7 +136,7 @@ module.exports = {
     );
     process.env.NODE_ENV !== "local" &&
       config.plugin("generate-tx-registration-file").use(
-        new GenerateTXRegistrationFilePlugin(null, {
+        new GenerateTXRegistrationFilePlugin(OUTPUT_DIR, null, {
           identifier: `com.trinasolar.${confJsonFtlInfo.identifier}.${process.env.NODE_ENV}`,
           name: confJsonFtlInfo.name,
           version: versionStr,
