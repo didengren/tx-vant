@@ -8,7 +8,7 @@ plugins.push([
   },
   "vant"
 ]);
-if (process.env.NODE_ENV !== "local")
+if (process.env.NODE_ENV === "production")
   plugins.push(["transform-remove-console", { exclude: [] }]); // exclude: ["error", "warn"]
 
 module.exports = {
