@@ -37,9 +37,9 @@ try {
 const getVersion = (argv) => {
   let version = "0.0.1";
   // console.log("process.argv____", argv);
-  const reg = new RegExp(/--version-/i);
+  const reg = new RegExp(/--versions/i);
   for (let i = 0; i < argv.length; i++) {
-    if (~argv[i].search(reg)) version = argv[i].replace(reg, "");
+    if (~argv[i].search(reg)) version = argv[i] + 1 || "0.0.1";
   }
   return version;
 };
